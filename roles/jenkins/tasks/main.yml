@@ -17,7 +17,7 @@
 - name: Import Jenkins GPG key
   rpm_key:
     state: present
-    key: https://pkg.jenkins.io/redhat/jenkins.io.key
+    key: https://pkg.jenkins.io/redhat/jenkins.io-2.60.1.key
 
 - name: Install Jenkins
   yum:
