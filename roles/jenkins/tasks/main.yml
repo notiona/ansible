@@ -15,15 +15,29 @@
   shell: wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 
 - name: Import Jenkins GPG key
-  rpm_key:
-    state: present
-    key: https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+#  rpm_key:
+#    state: present
+#    key: https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+  shell: sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+#- name: Upgrade yum
+#  shell: sudo yum upgrade -y
 
 - name: Install Jenkins
   yum:
     name: jenkins-2.164.1
     enablerepo: jenkins
     state: present
+    disable_gpg_check: yes
+
+#- name: Install Jenkins dependency
+#  shell: sudo yum install fontconfig java-17-openjdk -y
+
+#- name: Install Jenkins
+#  shell: sudo yum install jenkins-2.60.1 -y --nogpgcheck
+
+#- name: Reload daemon
+#  shell: sudo systemctl daemon-reload
 
 - name: Start Jenkins
   service:
