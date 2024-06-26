@@ -16,7 +16,7 @@
 #    state: present
 
 - name: Install java 11
-  shell: wget https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.rpm
+  shell: sudo rpm --import https://yum.corretto.aws/corretto.key && sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo && sudo yum install -y java-11-amazon-corretto-devel
 
 - name: Add Jenkins repository
   shell: wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
@@ -33,7 +33,8 @@
 - name: Install Jenkins
   yum:
 #    name: jenkins-2.164.1
-    name: jenkins-2.361.4
+#    name: jenkins-2.361.4
+    name: jenkins-2.387.3
     enablerepo: jenkins
     state: present
     disable_gpg_check: yes
