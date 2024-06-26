@@ -3,13 +3,20 @@
 
 - name: Removing old version of JAVA from Amazon Linux
   yum:
-    name: java-1.7.0-openjdk
+#    name: java-1.7.0-openjdk
+    name: java-1.8.0-openjdk
     state: absent
 
-- name: Install specific supported version of JAVA
-  yum:
-    name: java-1.8.0-openjdk
-    state: present
+#- name: Upgrade yum
+#  shell: sudo yum upgrade -y
+
+#- name: Install specific supported version of JAVA
+#  yum:
+#    name: java-11-openjdk
+#    state: present
+
+- name: Install java 11
+  shell: wget https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.rpm
 
 - name: Add Jenkins repository
   shell: wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
@@ -25,7 +32,8 @@
 
 - name: Install Jenkins
   yum:
-    name: jenkins-2.164.1
+#    name: jenkins-2.164.1
+    name: jenkins-2.361.4
     enablerepo: jenkins
     state: present
     disable_gpg_check: yes
